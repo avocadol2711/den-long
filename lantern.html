@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tự trang trí đèn lồng</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fff8ed;
+    color: #3b2a20;
+}
+
+.lantern-app {
+    width: 100%;
+    max-width: 900px;
+    margin: auto;
+    padding: 35px 20px 45px;
+    text-align: center;
+}
+
+.title {
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    font-size: 16px;
+    opacity: .75;
+    margin-bottom: 30px;
+}
+
+/* =====================
+   LANTERN
+===================== */
+
+.lantern-stage {
+    position: relative;
+    width: 100%;
+    height: 420px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.lantern {
+    position: relative;
+    width: 220px;
+    height: 275px;
+    transition: .5s ease;
+    filter: drop-shadow(0 15px 25px rgba(0,0,0,.2));
+}
+
+/* Top cap */
+
+.lantern-top {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 28px;
+    background: #5b3825;
+    border-radius: 8px 8px 3px 3px;
+    z-index: 5;
+}
+
+.lantern-top::before {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 30px;
+    background: #5b3825;
+    top: -27px;
+    left: 41px;
+}
+
+/* Lantern body */
+
+.lantern-body {
+    position: absolute;
+    top: 25px;
+    left: 10px;
+    width: 200px;
+    height: 210px;
+    background: #d93636;
+    border-radius: 45% 45% 38% 38%;
+    border: 7px solid #7e281f;
+    overflow: hidden;
+    transition: background .4s ease, box-shadow .4s ease;
+}
+
+/* Vertical ribs */
+
+.lantern-body::before,
+.lantern-body::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 8px;
+    background: rgba(80,30,20,.35);
+    z-index: 3;
+}
+
+.lantern-body::before {
+    left: 28px;
+}
+
+.lantern-body::after {
+    right: 28px;
+}
+
+/* Center highlight */
+
+.lantern-light {
+    position: absolute;
+    width: 95px;
+    height: 150px;
+    border-radius: 50%;
+    background: rgba(255,240,150,.45);
+    left: 50%;
+    top: 30px;
+    transform: translateX(-50%);
+    filter: blur(18px);
+    transition: .4s;
+}
+
+/* Pattern */
+
+.pattern {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 58px;
+    transition: .4s;
+}
+
+/* Bottom */
+
+.lantern-bottom {
+    position: absolute;
+    bottom: 38px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 28px;
+    background: #5b3825;
+    border-radius: 3px 3px 10px 10px;
+    z-index: 5;
+}
+
+/* Tassel */
+
+.tassel {
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 65px;
+    background: #e4ad32;
+    border-radius: 5px;
+    transition: background .4s;
+}
+
+.tassel::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: -18px;
+    width: 48px;
+    height: 25px;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            transparent 0px,
+            transparent 5px,
+            currentColor 5px,
+            currentColor 7px
+        );
+    color: inherit;
+}
+
+/* Glow */
+
+.glow {
+    position: absolute;
+    width: 230px;
+    height: 230px;
+    border-radius: 50%;
+    background: rgba(255,210,80,.25);
+    filter: blur(45px);
+    z-index: -1;
+    transition: .5s;
+}
+
+/* =====================
+   CONTROLS
+===================== */
+
+.controls {
+    background: rgba(255,255,255,.8);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 8px 30px rgba(0,0,0,.08);
+}
+
+.control-group {
+    margin-bottom: 22px;
+}
+
+.control-group:last-child {
+    margin-bottom: 0;
+}
+
+.control-title {
+    font-weight: 700;
+    margin-bottom: 12px;
+    font-size: 17px;
+}
+
+.options {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Color buttons */
+
+.color-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+    cursor: pointer;
+    transition: .2s;
+}
+
+.color-btn:hover {
+    transform: scale(1.1);
+}
+
+.color-btn.active {
+    outline: 3px solid #3b2a20;
+    transform: scale(1.1);
+}
+
+/* Pattern buttons */
+
+.pattern-btn,
+.tassel-btn {
+    border: none;
+    background: #f3e8da;
+    padding: 10px 16px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: .2s;
+}
+
+.pattern-btn:hover,
+.tassel-btn:hover {
+    transform: translateY(-2px);
+}
+
+.pattern-btn.active,
+.tassel-btn.active {
+    background: #3b2a20;
+    color: white;
+}
+
+/* Finish */
+
+.finish-btn {
+    margin-top: 28px;
+    border: none;
+    background: #b7352c;
+    color: white;
+    padding: 14px 28px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.finish-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 20px rgba(183,53,44,.25);
+}
+
+.result {
+    margin-top: 18px;
+    font-weight: 600;
+    min-height: 24px;
+}
+
+/* =====================
+   MOBILE
+===================== */
+
+@media (max-width: 600px) {
+
+    .lantern-stage {
+        height: 350px;
+    }
+
+    .lantern {
+        transform: scale(.82);
+    }
+
+    .controls {
+        padding: 20px 14px;
+    }
+
+    .color-btn {
+        width: 40px;
+        height: 40px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="lantern-app">
+
+    <div class="title">
+        🏮 Tự làm chiếc đèn lồng của bạn
+    </div>
+
+    <div class="subtitle">
+        Chọn màu, họa tiết và tua rua để tạo nên chiếc đèn Trung thu của riêng bạn.
+    </div>
+
+    <!-- LANTERN -->
+
+    <div class="lantern-stage">
+
+        <div class="glow"></div>
+
+        <div class="lantern">
+
+            <div class="lantern-top"></div>
+
+            <div class="lantern-body">
+
+                <div class="lantern-light"></div>
+
+                <div class="pattern" id="pattern">
+                    🌸
+                </div>
+
+            </div>
+
+            <div class="lantern-bottom"></div>
+
+            <div class="tassel" id="tassel"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- CONTROLS -->
+
+    <div class="controls">
+
+        <!-- COLOR -->
+
+        <div class="control-group">
+
+            <div class="control-title">
+                🎨 Chọn màu đèn
+            </div>
+
+            <div class="options">
+
+                <button
+                    class="color-btn active"
+                    style="background:#d93636"
+                    data-color="#d93636"
+                    data-glow="rgba(255,80,60,.35)">
+                </button>
+
+                <button
+                    class="color-btn"
+                    style="background:#f0b429"
+                    data-color="#f0b429"
+                    data-glow="rgba(255,190,50,.4)">
+                </button>
+
+                <button
+                    class="color-btn"
+                    style="background:#2878b8"
+                    data-color="#2878b8"
+                    data-glow="rgba(60,150,255,.3)">
+                </button>
+
+                <button
+                    class="color-btn"
+                    style="background:#7b4ab8"
+                    data-color="#7b4ab8"
+                    data-glow="rgba(150,90,255,.3)">
+                </button>
+
+                <button
+                    class="color-btn"
+                    style="background:#e66b91"
+                    data-color="#e66b91"
+                    data-glow="rgba(255,100,150,.3)">
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PATTERN -->
+
+        <div class="control-group">
+
+            <div class="control-title">
+                🌸 Chọn họa tiết
+            </div>
+
+            <div class="options">
+
+                <button class="pattern-btn active" data-pattern="🌸">
+                    🌸 Hoa
+                </button>
+
+                <button class="pattern-btn" data-pattern="⭐">
+                    ⭐ Sao
+                </button>
+
+                <button class="pattern-btn" data-pattern="🌙">
+                    🌙 Trăng
+                </button>
+
+                <button class="pattern-btn" data-pattern="☁️">
+                    ☁️ Mây
+                </button>
+
+                <button class="pattern-btn" data-pattern="🐇">
+                    🐇 Thỏ
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- TASSEL -->
+
+        <div class="control-group">
+
+            <div class="control-title">
+                🧵 Chọn màu tua rua
+            </div>
+
+            <div class="options">
+
+                <button
+                    class="tassel-btn active"
+                    data-tassel="#e4ad32">
+                    Vàng
+                </button>
+
+                <button
+                    class="tassel-btn"
+                    data-tassel="#d93636">
+                    Đỏ
+                </button>
+
+                <button
+                    class="tassel-btn"
+                    data-tassel="#2878b8">
+                    Xanh
+                </button>
+
+                <button
+                    class="tassel-btn"
+                    data-tassel="#7b4ab8">
+                    Tím
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <button class="finish-btn" id="finish">
+            ✨ Hoàn thành chiếc đèn
+        </button>
+
+        <div class="result" id="result"></div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const lanternBody = document.querySelector(".lantern-body");
+const glow = document.querySelector(".glow");
+const pattern = document.querySelector("#pattern");
+const tassel = document.querySelector("#tassel");
+const result = document.querySelector("#result");
+
+
+/* =====================
+   COLOR
+===================== */
+
+document.querySelectorAll(".color-btn").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        document
+            .querySelectorAll(".color-btn")
+            .forEach(btn => btn.classList.remove("active"));
+
+        button.classList.add("active");
+
+        const color = button.dataset.color;
+        const glowColor = button.dataset.glow;
+
+        lanternBody.style.background = color;
+
+        glow.style.background = glowColor;
+
+    });
+
+});
+
+
+/* =====================
+   PATTERN
+===================== */
+
+document.querySelectorAll(".pattern-btn").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        document
+            .querySelectorAll(".pattern-btn")
+            .forEach(btn => btn.classList.remove("active"));
+
+        button.classList.add("active");
+
+        pattern.textContent = button.dataset.pattern;
+
+    });
+
+});
+
+
+/* =====================
+   TASSEL
+===================== */
+
+document.querySelectorAll(".tassel-btn").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        document
+            .querySelectorAll(".tassel-btn")
+            .forEach(btn => btn.classList.remove("active"));
+
+        button.classList.add("active");
+
+        const color = button.dataset.tassel;
+
+        tassel.style.background = color;
+        tassel.style.color = color;
+
+    });
+
+});
+
+
+/* =====================
+   FINISH
+===================== */
+
+document.querySelector("#finish").addEventListener("click", () => {
+
+    const selectedColor =
+        document.querySelector(".color-btn.active").dataset.color;
+
+    const selectedPattern =
+        document.querySelector(".pattern-btn.active").textContent.trim();
+
+    const selectedTassel =
+        document.querySelector(".tassel-btn.active").textContent.trim();
+
+    result.innerHTML =
+        `🏮 Chiếc đèn của bạn: ${selectedPattern} · ${selectedTassel}`;
+
+    lanternBody.style.transform = "scale(1.05)";
+
+    setTimeout(() => {
+        lanternBody.style.transform = "scale(1)";
+    }, 350);
+
+});
+
+</script>
+
+</body>
+</html>
