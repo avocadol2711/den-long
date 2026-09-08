@@ -38,6 +38,7 @@ body {
     margin-bottom: 30px;
 }
 
+
 /* =====================
    LANTERN
 ===================== */
@@ -59,6 +60,7 @@ body {
     transition: .5s ease;
     filter: drop-shadow(0 15px 25px rgba(0,0,0,.2));
 }
+
 
 /* Top cap */
 
@@ -84,6 +86,7 @@ body {
     left: 41px;
 }
 
+
 /* Lantern body */
 
 .lantern-body {
@@ -98,6 +101,7 @@ body {
     overflow: hidden;
     transition: background .4s ease, box-shadow .4s ease;
 }
+
 
 /* Vertical ribs */
 
@@ -120,6 +124,7 @@ body {
     right: 28px;
 }
 
+
 /* Center highlight */
 
 .lantern-light {
@@ -135,6 +140,7 @@ body {
     transition: .4s;
 }
 
+
 /* Pattern */
 
 .pattern {
@@ -147,6 +153,7 @@ body {
     font-size: 58px;
     transition: .4s;
 }
+
 
 /* Bottom */
 
@@ -161,6 +168,7 @@ body {
     border-radius: 3px 3px 10px 10px;
     z-index: 5;
 }
+
 
 /* Tassel */
 
@@ -194,6 +202,7 @@ body {
     color: inherit;
 }
 
+
 /* Glow */
 
 .glow {
@@ -206,6 +215,7 @@ body {
     z-index: -1;
     transition: .5s;
 }
+
 
 /* =====================
    CONTROLS
@@ -239,6 +249,7 @@ body {
     gap: 10px;
 }
 
+
 /* Color buttons */
 
 .color-btn {
@@ -259,6 +270,7 @@ body {
     outline: 3px solid #3b2a20;
     transform: scale(1.1);
 }
+
 
 /* Pattern buttons */
 
@@ -284,7 +296,8 @@ body {
     color: white;
 }
 
-/* Finish */
+
+/* Finish button */
 
 .finish-btn {
     margin-top: 28px;
@@ -304,11 +317,175 @@ body {
     box-shadow: 0 7px 20px rgba(183,53,44,.25);
 }
 
+
+/* =====================
+   RESULT
+===================== */
+
 .result {
-    margin-top: 18px;
-    font-weight: 600;
-    min-height: 24px;
+    display: none;
+    position: relative;
+    width: 100%;
+    min-height: 560px;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }
+
+
+/* Sau khi hoàn thành:
+   chỉ còn khu vực chiếc đèn */
+
+.lantern-app.finished .title,
+.lantern-app.finished .subtitle,
+.lantern-app.finished .lantern-stage,
+.lantern-app.finished .controls {
+    display: none;
+}
+
+.lantern-app.finished .result {
+    display: flex;
+}
+
+
+/* Chiếc đèn hoàn thành */
+
+.result .lantern {
+    transform: scale(1.6);
+    transform-origin: center center;
+
+    filter:
+        drop-shadow(0 0 18px rgba(255,220,100,.75))
+        drop-shadow(0 15px 25px rgba(0,0,0,.18));
+
+    animation:
+        finishedLantern
+        .9s
+        cubic-bezier(.2,.8,.2,1)
+        forwards;
+
+    z-index: 2;
+}
+
+
+/* Ánh sáng lớn phía sau */
+
+.result .glow {
+    width: 300px;
+    height: 300px;
+    filter: blur(55px);
+    opacity: .95;
+}
+
+
+/* =====================
+   SPARKLES
+===================== */
+
+.result::before,
+.result::after {
+    position: absolute;
+    white-space: pre;
+    z-index: 3;
+    pointer-events: none;
+
+    color: #e4ad32;
+
+    text-shadow:
+        0 0 8px rgba(255,220,100,.8),
+        0 0 18px rgba(255,220,100,.5);
+}
+
+
+/* Sparkles phía trên */
+
+.result::before {
+    content:
+        "✦   ✧       ✦\A"
+        "       ✧   ✦   ✧\A"
+        "  ✦       ✧   ✦";
+
+    top: 95px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    font-size: 30px;
+    line-height: 2.1;
+
+    animation:
+        sparkleFloat
+        2.2s
+        ease-in-out
+        infinite;
+}
+
+
+/* Sparkles phía dưới */
+
+.result::after {
+    content:
+        "✧       ✦   ✧\A"
+        "  ✦   ✧       ✦\A"
+        "       ✦   ✧";
+
+    bottom: 85px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    font-size: 24px;
+    line-height: 2.3;
+
+    animation:
+        sparkleFloat
+        2.2s
+        ease-in-out
+        infinite;
+
+    animation-delay: .7s;
+}
+
+
+/* Đèn xuất hiện */
+
+@keyframes finishedLantern {
+
+    0% {
+        opacity: 0;
+        transform: scale(.45);
+    }
+
+    65% {
+        opacity: 1;
+        transform: scale(1.72);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1.6);
+    }
+
+}
+
+
+/* Lấp lánh nhấp nháy */
+
+@keyframes sparkleFloat {
+
+    0%,
+    100% {
+        opacity: .35;
+        filter: blur(.2px);
+    }
+
+    50% {
+        opacity: 1;
+        filter: blur(0);
+    }
+
+}
+
 
 /* =====================
    MOBILE
@@ -332,9 +509,50 @@ body {
         width: 40px;
         height: 40px;
     }
+
+    .result {
+        min-height: 430px;
+    }
+
+    .result .lantern {
+        transform: scale(1.2);
+    }
+
+
+    @keyframes finishedLantern {
+
+        0% {
+            opacity: 0;
+            transform: scale(.45);
+        }
+
+        65% {
+            opacity: 1;
+            transform: scale(1.3);
+        }
+
+        100% {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+    }
+
+
+    .result::before {
+        top: 55px;
+        font-size: 22px;
+    }
+
+    .result::after {
+        bottom: 45px;
+        font-size: 18px;
+    }
+
 }
 </style>
 </head>
+
 
 <body>
 
@@ -348,7 +566,10 @@ body {
         Chọn màu, họa tiết và tua rua để tạo nên chiếc đèn Trung thu của riêng bạn.
     </div>
 
-    <!-- LANTERN -->
+
+    <!-- =====================
+         LANTERN PREVIEW
+    ====================== -->
 
     <div class="lantern-stage">
 
@@ -377,9 +598,12 @@ body {
     </div>
 
 
-    <!-- CONTROLS -->
+    <!-- =====================
+         CONTROLS
+    ====================== -->
 
     <div class="controls">
+
 
         <!-- COLOR -->
 
@@ -441,23 +665,33 @@ body {
 
             <div class="options">
 
-                <button class="pattern-btn active" data-pattern="🌸">
+                <button
+                    class="pattern-btn active"
+                    data-pattern="🌸">
                     🌸 Hoa
                 </button>
 
-                <button class="pattern-btn" data-pattern="⭐">
+                <button
+                    class="pattern-btn"
+                    data-pattern="⭐">
                     ⭐ Sao
                 </button>
 
-                <button class="pattern-btn" data-pattern="🌙">
+                <button
+                    class="pattern-btn"
+                    data-pattern="🌙">
                     🌙 Trăng
                 </button>
 
-                <button class="pattern-btn" data-pattern="☁️">
+                <button
+                    class="pattern-btn"
+                    data-pattern="☁️">
                     ☁️ Mây
                 </button>
 
-                <button class="pattern-btn" data-pattern="🐇">
+                <button
+                    class="pattern-btn"
+                    data-pattern="🐇">
                     🐇 Thỏ
                 </button>
 
@@ -505,12 +739,24 @@ body {
         </div>
 
 
-        <button class="finish-btn" id="finish">
+        <!-- FINISH -->
+
+        <button
+            class="finish-btn"
+            id="finish">
             ✨ Hoàn thành chiếc đèn
         </button>
 
-        <div class="result" id="result"></div>
+    </div>
 
+
+    <!-- =====================
+         FINISHED LANTERN
+    ====================== -->
+
+    <div
+        class="result"
+        id="result">
     </div>
 
 </div>
@@ -518,109 +764,165 @@ body {
 
 <script>
 
-const lanternBody = document.querySelector(".lantern-body");
-const glow = document.querySelector(".glow");
-const pattern = document.querySelector("#pattern");
-const tassel = document.querySelector("#tassel");
-const result = document.querySelector("#result");
+/* =====================
+   ELEMENTS
+===================== */
+
+const app =
+    document.querySelector(".lantern-app");
+
+const lanternBody =
+    document.querySelector(".lantern-body");
+
+const glow =
+    document.querySelector(".glow");
+
+const pattern =
+    document.querySelector("#pattern");
+
+const tassel =
+    document.querySelector("#tassel");
+
+const result =
+    document.querySelector("#result");
 
 
 /* =====================
    COLOR
 ===================== */
 
-document.querySelectorAll(".color-btn").forEach(button => {
+document
+    .querySelectorAll(".color-btn")
+    .forEach(button => {
 
-    button.addEventListener("click", () => {
+        button.addEventListener("click", () => {
 
-        document
-            .querySelectorAll(".color-btn")
-            .forEach(btn => btn.classList.remove("active"));
+            document
+                .querySelectorAll(".color-btn")
+                .forEach(btn =>
+                    btn.classList.remove("active")
+                );
 
-        button.classList.add("active");
+            button.classList.add("active");
 
-        const color = button.dataset.color;
-        const glowColor = button.dataset.glow;
+            const color =
+                button.dataset.color;
 
-        lanternBody.style.background = color;
+            const glowColor =
+                button.dataset.glow;
 
-        glow.style.background = glowColor;
+            lanternBody.style.background =
+                color;
+
+            glow.style.background =
+                glowColor;
+
+        });
 
     });
-
-});
 
 
 /* =====================
    PATTERN
 ===================== */
 
-document.querySelectorAll(".pattern-btn").forEach(button => {
+document
+    .querySelectorAll(".pattern-btn")
+    .forEach(button => {
 
-    button.addEventListener("click", () => {
+        button.addEventListener("click", () => {
 
-        document
-            .querySelectorAll(".pattern-btn")
-            .forEach(btn => btn.classList.remove("active"));
+            document
+                .querySelectorAll(".pattern-btn")
+                .forEach(btn =>
+                    btn.classList.remove("active")
+                );
 
-        button.classList.add("active");
+            button.classList.add("active");
 
-        pattern.textContent = button.dataset.pattern;
+            pattern.textContent =
+                button.dataset.pattern;
+
+        });
 
     });
-
-});
 
 
 /* =====================
    TASSEL
 ===================== */
 
-document.querySelectorAll(".tassel-btn").forEach(button => {
+document
+    .querySelectorAll(".tassel-btn")
+    .forEach(button => {
 
-    button.addEventListener("click", () => {
+        button.addEventListener("click", () => {
 
-        document
-            .querySelectorAll(".tassel-btn")
-            .forEach(btn => btn.classList.remove("active"));
+            document
+                .querySelectorAll(".tassel-btn")
+                .forEach(btn =>
+                    btn.classList.remove("active")
+                );
 
-        button.classList.add("active");
+            button.classList.add("active");
 
-        const color = button.dataset.tassel;
+            const color =
+                button.dataset.tassel;
 
-        tassel.style.background = color;
-        tassel.style.color = color;
+            tassel.style.background =
+                color;
+
+            tassel.style.color =
+                color;
+
+        });
 
     });
-
-});
 
 
 /* =====================
    FINISH
 ===================== */
 
-document.querySelector("#finish").addEventListener("click", () => {
+document
+    .querySelector("#finish")
+    .addEventListener("click", () => {
 
-    const selectedColor =
-        document.querySelector(".color-btn.active").dataset.color;
+        const lantern =
+            document.querySelector(".lantern");
 
-    const selectedPattern =
-        document.querySelector(".pattern-btn.active").textContent.trim();
+        /*
+         * Sao chép chính chiếc đèn
+         * mà người đọc vừa trang trí.
+         *
+         * Vì vậy màu, họa tiết và
+         * tua rua đều được giữ nguyên.
+         */
 
-    const selectedTassel =
-        document.querySelector(".tassel-btn.active").textContent.trim();
+        const finishedLantern =
+            lantern.cloneNode(true);
 
-    result.innerHTML =
-        `🏮 Chiếc đèn của bạn: ${selectedPattern} · ${selectedTassel}`;
 
-    lanternBody.style.transform = "scale(1.05)";
+        /* Xóa kết quả cũ */
 
-    setTimeout(() => {
-        lanternBody.style.transform = "scale(1)";
-    }, 350);
+        result.innerHTML = "";
 
-});
+
+        /* Đưa chiếc đèn vào màn hình kết quả */
+
+        result.appendChild(
+            finishedLantern
+        );
+
+
+        /*
+         * Chuyển sang trạng thái
+         * "đã hoàn thành"
+         */
+
+        app.classList.add("finished");
+
+    });
 
 </script>
 
