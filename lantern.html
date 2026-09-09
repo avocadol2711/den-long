@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tự trang trí đèn lồng</title>
+<title>Tự làm đèn lồng Trung thu</title>
 
 <style>
 * {
@@ -13,252 +13,535 @@
 
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: #fff8ed;
-    color: #3b2a20;
+    background: #f8f1e5;
+    color: #3c2a20;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .lantern-app {
     width: 100%;
     max-width: 900px;
     margin: auto;
-    padding: 35px 20px 45px;
+    padding: 35px 20px 50px;
     text-align: center;
 }
 
 .title {
-    font-size: clamp(28px, 5vw, 48px);
+    font-size: clamp(28px, 5vw, 46px);
     font-weight: 700;
     margin-bottom: 8px;
 }
 
 .subtitle {
     font-size: 16px;
-    opacity: .75;
-    margin-bottom: 30px;
+    line-height: 1.6;
+    color: #725b4b;
+    margin-bottom: 28px;
 }
 
 
-/* =====================
-   LANTERN
-===================== */
+/* ==================================================
+   KHU VỰC ĐÈN
+================================================== */
 
 .lantern-stage {
-    position: relative;
     width: 100%;
-    height: 420px;
+    height: 430px;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
     overflow: hidden;
 }
+
+.glow {
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: rgba(232, 174, 69, .25);
+    filter: blur(55px);
+    transition: .5s;
+}
+
+
+/* ==================================================
+   ĐÈN CHUNG
+================================================== */
 
 .lantern {
+    width: 260px;
+    height: 310px;
     position: relative;
-    width: 220px;
-    height: 275px;
     transition: .5s ease;
-    filter: drop-shadow(0 15px 25px rgba(0,0,0,.2));
+    filter: drop-shadow(0 15px 18px rgba(70,40,20,.22));
 }
 
 
-/* Top cap */
+/* ==================================================
+   ĐÈN LỒNG TRÒN 
+================================================== */
 
-.lantern-top {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90px;
-    height: 28px;
-    background: #5b3825;
-    border-radius: 8px 8px 3px 3px;
-    z-index: 5;
+.lantern.round {
+    width: 230px;
+    height: 300px;
 }
 
-.lantern-top::before {
-    content: "";
+.round .lantern-body {
     position: absolute;
-    width: 8px;
-    height: 30px;
-    background: #5b3825;
-    top: -27px;
-    left: 41px;
-}
-
-
-/* Lantern body */
-
-.lantern-body {
-    position: absolute;
-    top: 25px;
-    left: 10px;
+    top: 45px;
+    left: 15px;
     width: 200px;
-    height: 210px;
-    background: #d93636;
-    border-radius: 45% 45% 38% 38%;
-    border: 7px solid #7e281f;
+    height: 205px;
+    border-radius: 48% 48% 45% 45%;
+    background: #b7352c;
+    border: 7px solid #63351f;
     overflow: hidden;
-    transition: background .4s ease, box-shadow .4s ease;
+    transition: .4s;
 }
 
-
-/* Vertical ribs */
-
-.lantern-body::before,
-.lantern-body::after {
+.round .lantern-body::before,
+.round .lantern-body::after {
     content: "";
     position: absolute;
     top: 0;
     bottom: 0;
     width: 8px;
-    background: rgba(80,30,20,.35);
-    z-index: 3;
+    background: rgba(80,40,20,.32);
 }
 
-.lantern-body::before {
+.round .lantern-body::before {
     left: 28px;
 }
 
-.lantern-body::after {
+.round .lantern-body::after {
     right: 28px;
 }
 
-
-/* Center highlight */
-
-.lantern-light {
+.round .top {
     position: absolute;
-    width: 95px;
-    height: 150px;
-    border-radius: 50%;
-    background: rgba(255,240,150,.45);
-    left: 50%;
-    top: 30px;
-    transform: translateX(-50%);
-    filter: blur(18px);
-    transition: .4s;
-}
-
-
-/* Pattern */
-
-.pattern {
-    position: absolute;
-    inset: 0;
-    z-index: 4;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 58px;
-    transition: .4s;
-}
-
-
-/* Bottom */
-
-.lantern-bottom {
-    position: absolute;
-    bottom: 38px;
+    top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    width: 90px;
+    width: 85px;
+    height: 30px;
+    background: #65391f;
+    border-radius: 7px;
+    z-index: 5;
+}
+
+.round .top::before {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 25px;
+    background: #65391f;
+    left: 38px;
+    top: -22px;
+}
+
+.round .bottom {
+    position: absolute;
+    bottom: 42px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85px;
     height: 28px;
-    background: #5b3825;
-    border-radius: 3px 3px 10px 10px;
+    background: #65391f;
+    border-radius: 4px 4px 10px 10px;
     z-index: 5;
 }
 
 
-/* Tassel */
+/* ==================================================
+   ĐÈN LỒNG DÀI
+================================================== */
+
+.lantern.hoian {
+    width: 220px;
+    height: 315px;
+}
+
+.hoian .lantern-body {
+    position: absolute;
+    top: 42px;
+    left: 15px;
+    width: 190px;
+    height: 220px;
+    background: #c34735;
+    border: 6px solid #563522;
+    border-radius: 28px 28px 35px 35px;
+    overflow: hidden;
+    transition: .4s;
+}
+
+/* Khung tre */
+
+.hoian .lantern-body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(
+            90deg,
+            transparent 0 13%,
+            rgba(92,53,30,.6) 13% 17%,
+            transparent 17% 83%,
+            rgba(92,53,30,.6) 83% 87%,
+            transparent 87%
+        );
+}
+
+.hoian .lantern-body::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 100%;
+    background: rgba(92,53,30,.55);
+}
+
+.hoian .top {
+    position: absolute;
+    top: 17px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95px;
+    height: 30px;
+    background: #563522;
+    border-radius: 7px;
+    z-index: 5;
+}
+
+.hoian .top::before {
+    content: "";
+    position: absolute;
+    width: 7px;
+    height: 25px;
+    background: #563522;
+    top: -22px;
+    left: 44px;
+}
+
+.hoian .bottom {
+    position: absolute;
+    bottom: 27px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95px;
+    height: 30px;
+    background: #563522;
+    border-radius: 5px 5px 10px 10px;
+    z-index: 5;
+}
+
+
+/* ==================================================
+   ĐÈN CÁ CHÉP
+================================================== */
+
+.lantern.carp {
+    width: 310px;
+    height: 240px;
+}
+
+.carp .fish {
+    position: absolute;
+    width: 245px;
+    height: 145px;
+    left: 28px;
+    top: 45px;
+    background: #c74632;
+    border: 6px solid #63351f;
+    border-radius: 58% 48% 48% 58%;
+    transition: .4s;
+}
+
+/* Đuôi cá */
+
+.carp .tail {
+    position: absolute;
+    right: 4px;
+    top: 65px;
+    width: 75px;
+    height: 100px;
+    background: #c74632;
+    border: 6px solid #63351f;
+    clip-path: polygon(0 50%, 100% 0, 82% 50%, 100% 100%);
+    transition: .4s;
+}
+
+/* Vây trên */
+
+.carp .fin-top {
+    position: absolute;
+    left: 130px;
+    top: 15px;
+    width: 65px;
+    height: 55px;
+    background: #c74632;
+    border: 5px solid #63351f;
+    clip-path: polygon(0 100%, 45% 0, 100% 100%);
+}
+
+/* Vây dưới */
+
+.carp .fin-bottom {
+    position: absolute;
+    left: 135px;
+    bottom: 25px;
+    width: 65px;
+    height: 45px;
+    background: #c74632;
+    border: 5px solid #63351f;
+    clip-path: polygon(0 0, 100% 0, 55% 100%);
+}
+
+/* Mắt */
+
+.carp .eye {
+    position: absolute;
+    left: 55px;
+    top: 90px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #241810;
+    z-index: 5;
+}
+
+.carp .eye::after {
+    content: "";
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 50%;
+    top: 3px;
+    left: 3px;
+}
+
+
+/* ==================================================
+   ĐÈN ÔNG SAO
+================================================== */
+
+.lantern.star {
+    width: 300px;
+    height: 300px;
+}
+
+.star-shape {
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    left: 10px;
+    top: 5px;
+
+    background: #d44735;
+
+    clip-path: polygon(
+        50% 0%,
+        61% 35%,
+        98% 35%,
+        68% 56%,
+        79% 91%,
+        50% 70%,
+        21% 91%,
+        32% 56%,
+        2% 35%,
+        39% 35%
+    );
+
+    filter:
+        drop-shadow(0 8px 5px rgba(80,40,20,.2));
+
+    transition: .4s;
+}
+
+/* Viền sao */
+
+.star-border {
+    position: absolute;
+    width: 245px;
+    height: 245px;
+    left: 27px;
+    top: 22px;
+
+    border: 6px solid #63351f;
+
+    clip-path: polygon(
+        50% 0%,
+        61% 35%,
+        98% 35%,
+        68% 56%,
+        79% 91%,
+        50% 70%,
+        21% 91%,
+        32% 56%,
+        2% 35%,
+        39% 35%
+    );
+
+    z-index: 3;
+}
+
+
+/* ==================================================
+   ÁNH SÁNG
+================================================== */
+
+.lantern-light {
+    position: absolute;
+    width: 95px;
+    height: 140px;
+    left: 50%;
+    top: 35px;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: rgba(255,230,145,.35);
+    filter: blur(18px);
+    z-index: 1;
+}
+
+
+/* ==================================================
+   HỌA TIẾT
+================================================== */
+
+.pattern {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 6;
+
+    font-size: 48px;
+    font-weight: bold;
+
+    color: #f8d27c;
+
+    text-shadow:
+        0 1px 2px rgba(70,35,20,.4);
+}
+
+
+/* ==================================================
+   TUA RUA
+================================================== */
 
 .tassel {
     position: absolute;
-    bottom: -25px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 12px;
-    height: 65px;
+    width: 10px;
+    height: 55px;
     background: #e4ad32;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
     border-radius: 5px;
-    transition: background .4s;
+    z-index: 10;
 }
 
 .tassel::after {
     content: "";
     position: absolute;
+    left: -17px;
     bottom: 0;
-    left: -18px;
-    width: 48px;
+    width: 44px;
     height: 25px;
+
     background:
         repeating-linear-gradient(
             90deg,
-            transparent 0px,
-            transparent 5px,
-            currentColor 5px,
-            currentColor 7px
+            currentColor 0 4px,
+            transparent 4px 7px
         );
+
     color: inherit;
 }
 
 
-/* Glow */
-
-.glow {
-    position: absolute;
-    width: 230px;
-    height: 230px;
-    border-radius: 50%;
-    background: rgba(255,210,80,.25);
-    filter: blur(45px);
-    z-index: -1;
-    transition: .5s;
-}
-
-
-/* =====================
+/* ==================================================
    CONTROLS
-===================== */
+================================================== */
 
 .controls {
-    background: rgba(255,255,255,.8);
-    border-radius: 20px;
+    background: rgba(255,255,255,.85);
+    border-radius: 22px;
     padding: 25px;
-    box-shadow: 0 8px 30px rgba(0,0,0,.08);
+    box-shadow: 0 8px 30px rgba(70,40,20,.08);
 }
 
 .control-group {
-    margin-bottom: 22px;
-}
-
-.control-group:last-child {
-    margin-bottom: 0;
+    margin-bottom: 25px;
 }
 
 .control-title {
-    font-weight: 700;
-    margin-bottom: 12px;
     font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 13px;
 }
 
 .options {
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
     gap: 10px;
 }
 
 
-/* Color buttons */
+/* ==================================================
+   KIỂU ĐÈN
+================================================== */
+
+.shape-btn {
+    border: 2px solid #dbc5aa;
+    background: #fffaf3;
+    color: #493427;
+
+    padding: 12px 18px;
+
+    border-radius: 12px;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .25s;
+}
+
+.shape-btn:hover {
+    transform: translateY(-2px);
+}
+
+.shape-btn.active {
+    background: #5a3826;
+    color: white;
+    border-color: #5a3826;
+}
+
+
+/* ==================================================
+   MÀU
+================================================== */
 
 .color-btn {
     width: 45px;
     height: 45px;
+
     border-radius: 50%;
+
     border: 3px solid white;
-    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,.16);
+
     cursor: pointer;
+
     transition: .2s;
 }
 
@@ -267,21 +550,31 @@ body {
 }
 
 .color-btn.active {
-    outline: 3px solid #3b2a20;
+    outline: 3px solid #5a3826;
     transform: scale(1.1);
 }
 
 
-/* Pattern buttons */
+/* ==================================================
+   HỌA TIẾT + TUA RUA
+================================================== */
 
 .pattern-btn,
 .tassel-btn {
     border: none;
-    background: #f3e8da;
+
+    background: #f1e3d2;
+
+    color: #493427;
+
     padding: 10px 16px;
-    border-radius: 30px;
+
+    border-radius: 25px;
+
     cursor: pointer;
+
     font-size: 15px;
+
     transition: .2s;
 }
 
@@ -292,49 +585,65 @@ body {
 
 .pattern-btn.active,
 .tassel-btn.active {
-    background: #3b2a20;
+    background: #5a3826;
     color: white;
 }
 
 
-/* Finish button */
+/* ==================================================
+   HOÀN THÀNH
+================================================== */
 
 .finish-btn {
-    margin-top: 28px;
+    margin-top: 5px;
+
     border: none;
+
     background: #b7352c;
+
     color: white;
-    padding: 14px 28px;
+
+    padding: 15px 30px;
+
     border-radius: 30px;
+
     font-size: 16px;
+
     font-weight: 700;
+
     cursor: pointer;
+
     transition: .25s;
 }
 
 .finish-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 7px 20px rgba(183,53,44,.25);
+
+    box-shadow:
+        0 8px 20px rgba(183,53,44,.25);
 }
 
 
-/* =====================
-   RESULT
-===================== */
+/* ==================================================
+   KẾT QUẢ
+================================================== */
 
 .result {
     display: none;
+
     position: relative;
+
     width: 100%;
     min-height: 560px;
+
     align-items: center;
     justify-content: center;
+
     overflow: hidden;
 }
 
 
-/* Sau khi hoàn thành:
-   chỉ còn khu vực chiếc đèn */
+/* Sau khi hoàn thành */
 
 .lantern-app.finished .title,
 .lantern-app.finished .subtitle,
@@ -348,15 +657,10 @@ body {
 }
 
 
-/* Chiếc đèn hoàn thành */
+/* Đèn hoàn thành */
 
 .result .lantern {
-    transform: scale(1.6);
-    transform-origin: center center;
-
-    filter:
-        drop-shadow(0 0 18px rgba(255,220,100,.75))
-        drop-shadow(0 15px 25px rgba(0,0,0,.18));
+    transform: scale(1.5);
 
     animation:
         finishedLantern
@@ -368,141 +672,136 @@ body {
 }
 
 
-/* Ánh sáng lớn phía sau */
+/* Đèn sao sau khi hoàn thành */
 
-.result .glow {
-    width: 300px;
-    height: 300px;
-    filter: blur(55px);
-    opacity: .95;
+.result .lantern.star {
+    transform: scale(1.35);
 }
 
 
-/* =====================
-   SPARKLES
-===================== */
+/* Đèn cá sau khi hoàn thành */
 
-.result::before,
-.result::after {
+.result .lantern.carp {
+    transform: scale(1.35);
+}
+
+
+/* Glow */
+
+.result::before {
+    content: "";
+
     position: absolute;
-    white-space: pre;
-    z-index: 3;
-    pointer-events: none;
 
-    color: #e4ad32;
+    width: 310px;
+    height: 310px;
+
+    border-radius: 50%;
+
+    background: rgba(235,184,78,.25);
+
+    filter: blur(60px);
+
+    z-index: 0;
+}
+
+
+/* ==================================================
+   LẤP LÁNH
+================================================== */
+
+.result::after {
+    content:
+        "✦       ✧       ✦\A"
+        "    ✧       ✦\A"
+        "✦       ✧       ✦";
+
+    position: absolute;
+
+    white-space: pre;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    font-size: 30px;
+    line-height: 2.3;
+
+    color: #d39a2e;
 
     text-shadow:
         0 0 8px rgba(255,220,100,.8),
-        0 0 18px rgba(255,220,100,.5);
-}
+        0 0 20px rgba(255,220,100,.5);
 
+    pointer-events: none;
 
-/* Sparkles phía trên */
-
-.result::before {
-    content:
-        "✦   ✧       ✦\A"
-        "       ✧   ✦   ✧\A"
-        "  ✦       ✧   ✦";
-
-    top: 95px;
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    font-size: 30px;
-    line-height: 2.1;
+    z-index: 4;
 
     animation:
-        sparkleFloat
-        2.2s
+        sparkle
+        2s
         ease-in-out
         infinite;
 }
 
 
-/* Sparkles phía dưới */
-
-.result::after {
-    content:
-        "✧       ✦   ✧\A"
-        "  ✦   ✧       ✦\A"
-        "       ✦   ✧";
-
-    bottom: 85px;
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    font-size: 24px;
-    line-height: 2.3;
-
-    animation:
-        sparkleFloat
-        2.2s
-        ease-in-out
-        infinite;
-
-    animation-delay: .7s;
-}
-
-
-/* Đèn xuất hiện */
+/* ==================================================
+   ANIMATION
+================================================== */
 
 @keyframes finishedLantern {
 
     0% {
         opacity: 0;
-        transform: scale(.45);
+        transform: scale(.4);
     }
 
     65% {
         opacity: 1;
-        transform: scale(1.72);
+        transform: scale(1.6);
     }
 
     100% {
         opacity: 1;
-        transform: scale(1.6);
+        transform: scale(1.5);
     }
-
 }
 
-
-/* Lấp lánh nhấp nháy */
-
-@keyframes sparkleFloat {
+@keyframes sparkle {
 
     0%,
     100% {
-        opacity: .35;
-        filter: blur(.2px);
+        opacity: .3;
     }
 
     50% {
         opacity: 1;
-        filter: blur(0);
     }
-
 }
 
 
-/* =====================
+/* ==================================================
    MOBILE
-===================== */
+================================================== */
 
 @media (max-width: 600px) {
 
     .lantern-stage {
-        height: 350px;
+        height: 360px;
     }
 
     .lantern {
-        transform: scale(.82);
+        transform: scale(.8);
     }
 
     .controls {
         padding: 20px 14px;
+    }
+
+    .shape-btn {
+        font-size: 14px;
+        padding: 10px 13px;
     }
 
     .color-btn {
@@ -511,44 +810,24 @@ body {
     }
 
     .result {
-        min-height: 430px;
+        min-height: 450px;
     }
 
     .result .lantern {
-        transform: scale(1.2);
+        transform: scale(1.05);
     }
 
-
-    @keyframes finishedLantern {
-
-        0% {
-            opacity: 0;
-            transform: scale(.45);
-        }
-
-        65% {
-            opacity: 1;
-            transform: scale(1.3);
-        }
-
-        100% {
-            opacity: 1;
-            transform: scale(1.2);
-        }
-
+    .result .lantern.star {
+        transform: scale(.95);
     }
 
-
-    .result::before {
-        top: 55px;
-        font-size: 22px;
+    .result .lantern.carp {
+        transform: scale(.95);
     }
 
     .result::after {
-        bottom: 45px;
-        font-size: 18px;
+        font-size: 20px;
     }
-
 }
 </style>
 </head>
@@ -556,28 +835,30 @@ body {
 
 <body>
 
-<div class="lantern-app">
+<div class="lantern-app" id="app">
 
     <div class="title">
-        🏮 Tự làm chiếc đèn lồng của bạn
+        🏮 Tự làm chiếc đèn Trung thu
     </div>
 
     <div class="subtitle">
-        Chọn màu, họa tiết và tua rua để tạo nên chiếc đèn Trung thu của riêng bạn.
+        Chọn một dáng đèn truyền thống, rồi tự trang trí chiếc đèn của riêng bạn.
     </div>
 
 
-    <!-- =====================
+    <!-- ==================================================
          LANTERN PREVIEW
-    ====================== -->
+    ================================================== -->
 
     <div class="lantern-stage">
 
         <div class="glow"></div>
 
-        <div class="lantern">
+        <!-- ĐÈN MẶC ĐỊNH: ĐÈN TRÒN -->
 
-            <div class="lantern-top"></div>
+        <div class="lantern round" id="lantern">
+
+            <div class="top"></div>
 
             <div class="lantern-body">
 
@@ -589,7 +870,7 @@ body {
 
             </div>
 
-            <div class="lantern-bottom"></div>
+            <div class="bottom"></div>
 
             <div class="tassel" id="tassel"></div>
 
@@ -598,14 +879,53 @@ body {
     </div>
 
 
-    <!-- =====================
+    <!-- ==================================================
          CONTROLS
-    ====================== -->
+    ================================================== -->
 
     <div class="controls">
 
 
-        <!-- COLOR -->
+        <!-- KIỂU DÁNG -->
+
+        <div class="control-group">
+
+            <div class="control-title">
+                🏮 Chọn dáng đèn
+            </div>
+
+            <div class="options">
+
+                <button
+                    class="shape-btn active"
+                    data-shape="round">
+                    🏮 Đèn tròn
+                </button>
+
+                <button
+                    class="shape-btn"
+                    data-shape="hoian">
+                    🏮 Đèn vải Hội An
+                </button>
+
+                <button
+                    class="shape-btn"
+                    data-shape="star">
+                    ⭐ Đèn ông sao
+                </button>
+
+                <button
+                    class="shape-btn"
+                    data-shape="carp">
+                    🐟 Đèn cá chép
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- MÀU -->
 
         <div class="control-group">
 
@@ -617,37 +937,37 @@ body {
 
                 <button
                     class="color-btn active"
-                    style="background:#d93636"
-                    data-color="#d93636"
-                    data-glow="rgba(255,80,60,.35)">
+                    style="background:#b7352c"
+                    data-color="#b7352c"
+                    data-glow="rgba(220,70,45,.35)">
                 </button>
 
                 <button
                     class="color-btn"
-                    style="background:#f0b429"
-                    data-color="#f0b429"
-                    data-glow="rgba(255,190,50,.4)">
+                    style="background:#d99b35"
+                    data-color="#d99b35"
+                    data-glow="rgba(235,180,70,.4)">
                 </button>
 
                 <button
                     class="color-btn"
-                    style="background:#2878b8"
-                    data-color="#2878b8"
-                    data-glow="rgba(60,150,255,.3)">
+                    style="background:#2f6682"
+                    data-color="#2f6682"
+                    data-glow="rgba(70,150,180,.3)">
                 </button>
 
                 <button
                     class="color-btn"
-                    style="background:#7b4ab8"
-                    data-color="#7b4ab8"
-                    data-glow="rgba(150,90,255,.3)">
+                    style="background:#6d4778"
+                    data-color="#6d4778"
+                    data-glow="rgba(150,90,170,.3)">
                 </button>
 
                 <button
                     class="color-btn"
-                    style="background:#e66b91"
-                    data-color="#e66b91"
-                    data-glow="rgba(255,100,150,.3)">
+                    style="background:#d06b5d"
+                    data-color="#d06b5d"
+                    data-glow="rgba(230,110,90,.3)">
                 </button>
 
             </div>
@@ -655,12 +975,12 @@ body {
         </div>
 
 
-        <!-- PATTERN -->
+        <!-- HỌA TIẾT -->
 
         <div class="control-group">
 
             <div class="control-title">
-                🌸 Chọn họa tiết
+                🌙 Chọn họa tiết
             </div>
 
             <div class="options">
@@ -668,13 +988,13 @@ body {
                 <button
                     class="pattern-btn active"
                     data-pattern="🌸">
-                    🌸 Hoa
+                    🌸 Hoa sen
                 </button>
 
                 <button
                     class="pattern-btn"
-                    data-pattern="⭐">
-                    ⭐ Sao
+                    data-pattern="🐟">
+                    🐟 Cá chép
                 </button>
 
                 <button
@@ -685,14 +1005,14 @@ body {
 
                 <button
                     class="pattern-btn"
-                    data-pattern="☁️">
-                    ☁️ Mây
+                    data-pattern="☁">
+                    ☁ Mây
                 </button>
 
                 <button
                     class="pattern-btn"
-                    data-pattern="🐇">
-                    🐇 Thỏ
+                    data-pattern="福">
+                    福 Chữ Phúc
                 </button>
 
             </div>
@@ -700,7 +1020,7 @@ body {
         </div>
 
 
-        <!-- TASSEL -->
+        <!-- TUA RUA -->
 
         <div class="control-group">
 
@@ -712,25 +1032,25 @@ body {
 
                 <button
                     class="tassel-btn active"
-                    data-tassel="#e4ad32">
+                    data-tassel="#d9a52f">
                     Vàng
                 </button>
 
                 <button
                     class="tassel-btn"
-                    data-tassel="#d93636">
+                    data-tassel="#b7352c">
                     Đỏ
                 </button>
 
                 <button
                     class="tassel-btn"
-                    data-tassel="#2878b8">
+                    data-tassel="#2f6682">
                     Xanh
                 </button>
 
                 <button
                     class="tassel-btn"
-                    data-tassel="#7b4ab8">
+                    data-tassel="#6d4778">
                     Tím
                 </button>
 
@@ -739,20 +1059,22 @@ body {
         </div>
 
 
-        <!-- FINISH -->
+        <!-- HOÀN THÀNH -->
 
         <button
             class="finish-btn"
             id="finish">
+
             ✨ Hoàn thành chiếc đèn
+
         </button>
 
     </div>
 
 
-    <!-- =====================
-         FINISHED LANTERN
-    ====================== -->
+    <!-- ==================================================
+         RESULT
+    ================================================== -->
 
     <div
         class="result"
@@ -764,15 +1086,15 @@ body {
 
 <script>
 
-/* =====================
+/* ==================================================
    ELEMENTS
-===================== */
+================================================== */
 
 const app =
-    document.querySelector(".lantern-app");
+    document.querySelector("#app");
 
-const lanternBody =
-    document.querySelector(".lantern-body");
+const lantern =
+    document.querySelector("#lantern");
 
 const glow =
     document.querySelector(".glow");
@@ -787,9 +1109,242 @@ const result =
     document.querySelector("#result");
 
 
-/* =====================
-   COLOR
-===================== */
+/* ==================================================
+   ĐỔI KIỂU DÁNG
+================================================== */
+
+document
+    .querySelectorAll(".shape-btn")
+    .forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            document
+                .querySelectorAll(".shape-btn")
+                .forEach(btn =>
+                    btn.classList.remove("active")
+                );
+
+            button.classList.add("active");
+
+            const shape =
+                button.dataset.shape;
+
+
+            /*
+             * Xóa kiểu cũ
+             */
+
+            lantern.className =
+                "lantern " + shape;
+
+
+            /*
+             * Tạo lại cấu trúc bên trong
+             * tùy theo dáng đèn
+             */
+
+            if (shape === "round") {
+
+                lantern.innerHTML = `
+                    <div class="top"></div>
+
+                    <div class="lantern-body">
+
+                        <div class="lantern-light"></div>
+
+                        <div class="pattern" id="pattern">
+                            🌸
+                        </div>
+
+                    </div>
+
+                    <div class="bottom"></div>
+
+                    <div class="tassel" id="tassel"></div>
+                `;
+
+            }
+
+
+            if (shape === "hoian") {
+
+                lantern.innerHTML = `
+                    <div class="top"></div>
+
+                    <div class="lantern-body">
+
+                        <div class="lantern-light"></div>
+
+                        <div class="pattern" id="pattern">
+                            🌸
+                        </div>
+
+                    </div>
+
+                    <div class="bottom"></div>
+
+                    <div class="tassel" id="tassel"></div>
+                `;
+
+            }
+
+
+            if (shape === "star") {
+
+                lantern.innerHTML = `
+                    <div class="star-shape">
+
+                        <div class="lantern-light"></div>
+
+                        <div class="pattern" id="pattern">
+                            🌙
+                        </div>
+
+                    </div>
+
+                    <div class="star-border"></div>
+
+                    <div class="tassel" id="tassel"></div>
+                `;
+
+            }
+
+
+            if (shape === "carp") {
+
+                lantern.innerHTML = `
+                    <div class="fish">
+
+                        <div class="lantern-light"></div>
+
+                        <div class="pattern" id="pattern">
+                            🌸
+                        </div>
+
+                        <div class="eye"></div>
+
+                    </div>
+
+                    <div class="tail"></div>
+
+                    <div class="fin-top"></div>
+
+                    <div class="fin-bottom"></div>
+
+                    <div class="tassel" id="tassel"></div>
+                `;
+
+            }
+
+
+            /*
+             * Cập nhật lại biến sau khi
+             * HTML của chiếc đèn thay đổi
+             */
+
+            updateCurrentElements();
+
+            /*
+             * Áp lại màu đang chọn
+             */
+
+            applyCurrentColor();
+
+            /*
+             * Áp lại tua rua đang chọn
+             */
+
+            applyCurrentTassel();
+
+            /*
+             * Áp lại họa tiết đang chọn
+             */
+
+            applyCurrentPattern();
+
+        });
+
+    });
+
+
+/* ==================================================
+   BIẾN CẬP NHẬT
+================================================== */
+
+function updateCurrentElements() {
+
+    window.currentBody =
+        lantern.querySelector(
+            ".lantern-body"
+        );
+
+    window.currentFish =
+        lantern.querySelector(
+            ".fish"
+        );
+
+    window.currentStar =
+        lantern.querySelector(
+            ".star-shape"
+        );
+
+    window.currentPattern =
+        lantern.querySelector(
+            ".pattern"
+        );
+
+    window.currentTassel =
+        lantern.querySelector(
+            ".tassel"
+        );
+
+}
+
+
+/* ==================================================
+   MÀU HIỆN TẠI
+================================================== */
+
+let selectedColor =
+    "#b7352c";
+
+let selectedGlow =
+    "rgba(220,70,45,.35)";
+
+
+function applyCurrentColor() {
+
+    if (window.currentBody) {
+
+        currentBody.style.background =
+            selectedColor;
+
+    }
+
+    if (window.currentFish) {
+
+        currentFish.style.background =
+            selectedColor;
+
+    }
+
+    if (window.currentStar) {
+
+        currentStar.style.background =
+            selectedColor;
+
+    }
+
+    glow.style.background =
+        selectedGlow;
+
+}
+
+
+/* ==================================================
+   CHỌN MÀU
+================================================== */
 
 document
     .querySelectorAll(".color-btn")
@@ -805,26 +1360,42 @@ document
 
             button.classList.add("active");
 
-            const color =
+            selectedColor =
                 button.dataset.color;
 
-            const glowColor =
+            selectedGlow =
                 button.dataset.glow;
 
-            lanternBody.style.background =
-                color;
-
-            glow.style.background =
-                glowColor;
+            applyCurrentColor();
 
         });
 
     });
 
 
-/* =====================
-   PATTERN
-===================== */
+/* ==================================================
+   HỌA TIẾT
+================================================== */
+
+let selectedPattern =
+    "🌸";
+
+
+function applyCurrentPattern() {
+
+    if (window.currentPattern) {
+
+        currentPattern.textContent =
+            selectedPattern;
+
+    }
+
+}
+
+
+/* ==================================================
+   CHỌN HỌA TIẾT
+================================================== */
 
 document
     .querySelectorAll(".pattern-btn")
@@ -840,17 +1411,42 @@ document
 
             button.classList.add("active");
 
-            pattern.textContent =
+            selectedPattern =
                 button.dataset.pattern;
+
+            applyCurrentPattern();
 
         });
 
     });
 
 
-/* =====================
-   TASSEL
-===================== */
+/* ==================================================
+   TUA RUA
+================================================== */
+
+let selectedTassel =
+    "#d9a52f";
+
+
+function applyCurrentTassel() {
+
+    if (window.currentTassel) {
+
+        currentTassel.style.background =
+            selectedTassel;
+
+        currentTassel.style.color =
+            selectedTassel;
+
+    }
+
+}
+
+
+/* ==================================================
+   CHỌN TUA RUA
+================================================== */
 
 document
     .querySelectorAll(".tassel-btn")
@@ -866,49 +1462,58 @@ document
 
             button.classList.add("active");
 
-            const color =
+            selectedTassel =
                 button.dataset.tassel;
 
-            tassel.style.background =
-                color;
-
-            tassel.style.color =
-                color;
+            applyCurrentTassel();
 
         });
 
     });
 
 
-/* =====================
-   FINISH
-===================== */
+/* ==================================================
+   KHỞI TẠO
+================================================== */
+
+updateCurrentElements();
+
+applyCurrentColor();
+
+applyCurrentPattern();
+
+applyCurrentTassel();
+
+
+/* ==================================================
+   HOÀN THÀNH
+================================================== */
 
 document
     .querySelector("#finish")
     .addEventListener("click", () => {
 
-        const lantern =
-            document.querySelector(".lantern");
-
         /*
-         * Sao chép chính chiếc đèn
-         * mà người đọc vừa trang trí.
-         *
-         * Vì vậy màu, họa tiết và
-         * tua rua đều được giữ nguyên.
+         * Sao chép chiếc đèn hiện tại.
+         * Vì vậy toàn bộ lựa chọn của người dùng
+         * được giữ lại.
          */
 
         const finishedLantern =
             lantern.cloneNode(true);
 
 
-        /* Xóa kết quả cũ */
+        /*
+         * Xóa kết quả cũ
+         */
 
         result.innerHTML = "";
 
 
-        /* Đưa chiếc đèn vào màn hình kết quả */
+        /*
+         * Đưa chiếc đèn hoàn chỉnh vào
+         * màn hình cuối.
+         */
 
         result.appendChild(
             finishedLantern
@@ -916,8 +1521,7 @@ document
 
 
         /*
-         * Chuyển sang trạng thái
-         * "đã hoàn thành"
+         * Chuyển sang màn hình hoàn thành.
          */
 
         app.classList.add("finished");
